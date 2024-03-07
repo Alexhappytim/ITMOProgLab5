@@ -1,30 +1,8 @@
 package dragon;
 
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashSet;
 
-public class Dragon implements Comparable<Dragon> {
-    static {
-        existId = new HashSet<Long>();
-    }
-
-    private static HashSet<Long> existId;
-
-    private static Long newId() {
-        for (long i = 1; i < 1000000000; i++) {
-            if (!existId.contains(i)) {
-                existId.add(i);
-                return i;
-            }
-        }
-        return (long) -1;
-    }
-
-    public static boolean isIdExist(Long id) {
-        return existId.contains(id);
-    }
-
+public class DragonWrapper {
     private Long id; //Поле не может быть null, Значение поля должно быть больше 0, Значение этого поля должно быть уникальным, Значение этого поля должно генерироваться автоматически
     private String name; //Поле не может быть null, Строка не может быть пустой
     private Coordinates coordinates; //Поле не может быть null
@@ -35,15 +13,8 @@ public class Dragon implements Comparable<Dragon> {
     private DragonType type; //Поле может быть null
     private DragonHead head;
 
-    public Dragon(String name, Coordinates coordinates, Long age, boolean speaking, Color color, DragonType type, DragonHead head) {
-        this(newId(), name, coordinates, new Date(), age, speaking, color, type, head);
-    }
-
-    public Dragon(Long id, String name, Coordinates coordinates, java.util.Date creationDate, Long age, boolean speaking, Color color, DragonType type, DragonHead head) {
+    public DragonWrapper(Long id, String name, Coordinates coordinates, java.util.Date creationDate, Long age, boolean speaking, Color color, DragonType type, DragonHead head) {
         setId(id);
-        if(!isIdExist(id)){
-            existId.add(id);
-        }
         setName(name);
         setCoordinates(coordinates);
         setCreationDate(creationDate);
@@ -53,7 +24,6 @@ public class Dragon implements Comparable<Dragon> {
         setType(type);
         setHead(head);
     }
-
     private void setId(Long id) {
         this.id = id;
     }
@@ -125,25 +95,5 @@ public class Dragon implements Comparable<Dragon> {
 
     public void setHead(DragonHead head) {
         this.head = head;
-    }
-
-    @Override
-    public int compareTo(Dragon o) {
-        return this.id.compareTo(o.getId());
-    }
-
-    @Override
-    public String toString() {
-        return "Dragon{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", coordinates=" + coordinates +
-                ", creationDate=" + creationDate +
-                ", age=" + age +
-                ", speaking=" + speaking +
-                ", color=" + color +
-                ", type=" + type +
-                ", head=" + head +
-                "}\n";
     }
 }
