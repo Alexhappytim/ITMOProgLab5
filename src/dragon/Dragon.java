@@ -1,6 +1,9 @@
 package dragon;
 
+import collectionManager.CollectionManager;
+
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.HashSet;
 
@@ -24,6 +27,7 @@ public class Dragon implements Comparable<Dragon> {
     public static boolean isIdExist(Long id) {
         return existId.contains(id);
     }
+
 
     private Long id; //Поле не может быть null, Значение поля должно быть больше 0, Значение этого поля должно быть уникальным, Значение этого поля должно генерироваться автоматически
     private String name; //Поле не может быть null, Строка не может быть пустой
@@ -137,13 +141,13 @@ public class Dragon implements Comparable<Dragon> {
         return "Dragon{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
-                ", coordinates=" + coordinates +
+                ", coordinates=" + coordinates.getX()+" "+coordinates.getY() +
                 ", creationDate=" + creationDate +
                 ", age=" + age +
                 ", speaking=" + speaking +
                 ", color=" + color +
                 ", type=" + type +
                 ", head=" + head +
-                "}\n";
+                "}";
     }
 }

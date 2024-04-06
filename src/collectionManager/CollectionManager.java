@@ -17,24 +17,24 @@ public class CollectionManager {
     public void add(Dragon dragon){
         collection.add(dragon);
     }
-    public void updateById(DragonWrapper dragonWrapper){
+    public void updateById(Long id, Dragon dragon){
         Iterator<Dragon> iter = collection.iterator();
         Dragon temp = null;
         while(iter.hasNext()) {
             temp = iter.next();
-            if (temp.getId().equals(dragonWrapper.getId())) {
+            if (temp.getId().equals(dragon.getId())) {
                 break;
-            }
+            }else{temp = null;}
         }
         if(temp != null){
-            temp.setName(dragonWrapper.getName());
-            temp.setCoordinates(dragonWrapper.getCoordinates());
-            temp.setCreationDate(dragonWrapper.getCreationDate());
-            temp.setAge(dragonWrapper.getAge());
-            temp.setSpeaking(dragonWrapper.isSpeaking());
-            temp.setColor(dragonWrapper.getColor());
-            temp.setType(dragonWrapper.getType());
-            temp.setHead(dragonWrapper.getHead());
+            temp.setName(dragon.getName());
+            temp.setCoordinates(dragon.getCoordinates());
+            temp.setCreationDate(dragon.getCreationDate());
+            temp.setAge(dragon.getAge());
+            temp.setSpeaking(dragon.isSpeaking());
+            temp.setColor(dragon.getColor());
+            temp.setType(dragon.getType());
+            temp.setHead(dragon.getHead());
         }
 
     }
@@ -120,41 +120,5 @@ public class CollectionManager {
     }
 
 
-    /*private ValidateError validateDragon(boolean isFromFile,Long id, String name, Coordinates coordinates, java.util.Date creationDate, Long age, boolean speaking, Color color, DragonType type, DragonHead head){
-        if(id == null){
-            return ValidateError.IDISNULL;
-        }
-        if(Dragon.isIdExist(id)){
-            return ValidateError.IDISUSED;
-        }
-        if(name == null){
-            return ValidateError.NAMEISNULL;
-        }
-        if(coordinates == null){
-            return ValidateError.COORDINATESISNULL;
-        }
-        if(creationDate == null){
-            return ValidateError.DATEISNULL;
-        }
-        if(age == null){
-            return ValidateError.AGEISNULL;
-        }
-        if(color == null){
-            return ValidateError.COLORISNULL;
-        }
-        if(type == null){
-            return ValidateError.DRAGONTYPEISNULL;
-        }
-        if(id<=0 && isFromFile){
-            return ValidateError.NEGATIVEID;
-        }
-        if(name.isEmpty()){
-            return ValidateError.NAMEISEMPTY;
-        }
-        if(age<=0){
-            return ValidateError.NEGATIVEAGE;
-        }
 
-
-    }*/
 }
