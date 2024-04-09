@@ -2,6 +2,7 @@ package dragon;
 
 import collectionManager.CollectionManager;
 
+import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
@@ -142,7 +143,7 @@ public class Dragon implements Comparable<Dragon> {
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", coordinates=" + coordinates.getX()+" "+coordinates.getY() +
-                ", creationDate=" + creationDate +
+                ", creationDate=" + DateFormat.getDateInstance().format(creationDate) +
                 ", age=" + age +
                 ", speaking=" + speaking +
                 ", color=" + color +

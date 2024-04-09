@@ -10,11 +10,12 @@ public class ExecutionManager {
     public static CommandManager commandManager;
     public static DumpManager dumpManager;
     public static boolean isRunning = true;
-    public static void start(){
+    public static void start(String fileAdress){
         consoleManager = new ConsoleManager();
         collectionManager = new CollectionManager();
         commandManager = new CommandManager();
         dumpManager = new DumpManager();
+        dumpManager.initialReadFromFile(fileAdress);
     }
 
 }

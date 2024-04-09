@@ -94,10 +94,9 @@ public class ConsoleManager {
             speakingS = in.nextLine();
             if (!speakingS.isEmpty()) {
                 try {
-                    
                     speaking = Boolean.parseBoolean(speakingS);
                     if(!(speakingS.equals("false")||speakingS.equals("true"))){
-                        1 / 0
+                        int i = 1 / 0;
                     }
                 } catch (Exception e) {
                     printError(ValidateError.PARSINGERROR);
@@ -168,6 +167,7 @@ public class ConsoleManager {
                 type = null;
             }
         } while (typeS.equals("#specialKostil"));
+
         do {
             println("Введите количество зубов, пустая строка означает что сама голова это null");
             toothCountS = in.nextLine();
