@@ -22,7 +22,7 @@ public class CollectionManager {
         Dragon temp = null;
         while(iter.hasNext()) {
             temp = iter.next();
-            if (temp.getId().equals(dragon.getId())) {
+            if (temp.getId().equals(id)){
                 break;
             }else{temp = null;}
         }

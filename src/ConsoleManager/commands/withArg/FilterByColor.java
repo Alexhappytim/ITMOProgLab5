@@ -1,10 +1,13 @@
-package ConsoleManager.commands;
+package ConsoleManager.commands.withArg;
 
+import ConsoleManager.commands.withArg.CommandWithArgument;
 import collectionManager.ValidateError;
 import dragon.Color;
 import execution.ExecutionManager;
 
-public class FilterByColor implements CommandWithArgument{
+import java.util.Scanner;
+
+public class FilterByColor implements CommandWithArgument {
     @Override
     public void execute(String arg) {
         Color color = null;
@@ -30,5 +33,10 @@ public class FilterByColor implements CommandWithArgument{
                 return;
             }}
         ExecutionManager.consoleManager.printCollection(ExecutionManager.collectionManager.filterByColor(color));
+    }
+
+    @Override
+    public void executeFromScript(String arg, Scanner scanner) {
+        execute(arg);
     }
 }

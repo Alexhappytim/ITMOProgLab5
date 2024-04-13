@@ -1,8 +1,11 @@
-package ConsoleManager.commands;
+package ConsoleManager.commands.withArg;
 
+import ConsoleManager.commands.withArg.CommandWithArgument;
 import execution.ExecutionManager;
 
-public class FilterLessThanSpeaking implements CommandWithArgument{
+import java.util.Scanner;
+
+public class FilterLessThanSpeaking implements CommandWithArgument {
     @Override
     public void execute(String arg) {
         switch(arg){
@@ -10,6 +13,9 @@ public class FilterLessThanSpeaking implements CommandWithArgument{
             case "false"->{ExecutionManager.consoleManager.printCollection(ExecutionManager.collectionManager.filterLessThanSpeaking(false));}
             default -> {ExecutionManager.consoleManager.println("Неверный аргумент");}
         }
-
+    }
+    @Override
+    public void executeFromScript(String arg, Scanner scanner) {
+        execute(arg);
     }
 }

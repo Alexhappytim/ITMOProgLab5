@@ -21,7 +21,7 @@ public class DumpManager {
                 if(!(items.get(1).startsWith("\"") && items.get(1).endsWith("\""))) {
                     throw new IOException();
                 }
-                if(Dragon.isIdExist(Long.parseLong(items.get(0)))||Long.parseLong(items.get(2))>41||Float.parseFloat(items.get(3))<-49||Long.parseLong(items.get(5))<0) {
+                if(Dragon.isIdExist(Long.parseLong(items.get(0)))||Long.parseLong(items.get(2))>41||Float.parseFloat(items.get(3))<-49||Long.parseLong(items.get(5))<0||Long.parseLong(items.get(0))<0) {
                     throw new IOException();
                 }
                 Color color;

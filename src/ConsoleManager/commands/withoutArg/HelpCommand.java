@@ -1,6 +1,9 @@
-package ConsoleManager.commands;
+package ConsoleManager.commands.withoutArg;
 
+import ConsoleManager.commands.withoutArg.Command;
 import execution.ExecutionManager;
+
+import java.util.Scanner;
 
 public class HelpCommand implements Command {
     @Override
@@ -24,5 +27,9 @@ public class HelpCommand implements Command {
                 filter by color color: вывести элементы, значение поля согог которых равно заданному
                 filter_contains_name name: Вывести элементы, значение поля пате которых содержит заданную подстроку
                 filter less than speaking speaking: вывести элементы, значение поля speaking которых меньше заданного""");
+    }
+    @Override
+    public void executeFromScript(Scanner scanner) {
+        execute();
     }
 }
