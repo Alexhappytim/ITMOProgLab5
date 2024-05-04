@@ -25,6 +25,7 @@ public class CommandManager {
         commandHashMap.put("exit", new ExitCommand());
         commandHashMap.put("head",new HeadCommand());
         commandHashMap.put("remove_head",new RemoveHeadCommand());
+        commandHashMap.put("undo", new UndoCommand());
 
         commandArgHashMap.put("update", new UpdateCommand());
         commandArgHashMap.put("remove_by_id", new RemoveByIdCommand());
@@ -197,7 +198,9 @@ public class CommandManager {
         else{return null;}
 
     }
-
+    public Command getUndoCommand(){
+        return commandHashMap.get("undo");
+    }
 
 
 }

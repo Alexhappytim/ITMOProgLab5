@@ -17,7 +17,7 @@ public class UpdateCommand implements CommandWithArgument {
             while(iter.hasNext()) {
                 temp = iter.next();
                 if (temp.getId().equals(a)) {
-                    ExecutionManager.collectionManager.updateById(a,ExecutionManager.consoleManager.inputNewElement());
+                    ExecutionManager.collectionManager.updateById(a,ExecutionManager.consoleManager.inputNewElement(),false);
                     return;
                 }
             }
@@ -39,7 +39,7 @@ public class UpdateCommand implements CommandWithArgument {
                 if (temp.getId().equals(a)) {
                     Dragon inputDragon = ExecutionManager.commandManager.inputNewElementFromFile(scanner);
                     if(inputDragon != null){
-                        ExecutionManager.collectionManager.updateById(a,inputDragon);
+                        ExecutionManager.collectionManager.updateById(a,inputDragon,false);
                     }
                     return;
                 }

@@ -1,11 +1,16 @@
 package collectionManager;
 
+import ConsoleManager.commands.CollectionChangeRecord;
+import ConsoleManager.commands.withoutArg.UndoCommand;
 import dragon.*;
+import execution.ExecutionManager;
 
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.PriorityQueue;
+
+import static ConsoleManager.commands.CollectionChangeRecord.Flags.*;
 
 public class CollectionManager {
     private PriorityQueue<Dragon> collection;
@@ -14,10 +19,14 @@ public class CollectionManager {
         collection = new PriorityQueue<Dragon>();
         creationDate = new Date();
     }
-    public void add(Dragon dragon){
+    public void add(Dragon dragon,boolean undo){
+        if(!undo) {
+            ((UndoCommand) ExecutionManager.commandManager.getUndoCommand()).addChange(new CollectionChangeRecord(ADD, dragon));
+        }
         collection.add(dragon);
+
     }
-    public void updateById(Long id, Dragon dragon){
+    public void updateById(Long id, Dragon dragon,boolean undo){
         Iterator<Dragon> iter = collection.iterator();
         Dragon temp = null;
         while(iter.hasNext()) {
@@ -27,6 +36,9 @@ public class CollectionManager {
             }else{temp = null;}
         }
         if(temp != null){
+            if(!undo) {
+                ((UndoCommand) ExecutionManager.commandManager.getUndoCommand()).addChange(new CollectionChangeRecord(UPDATE, temp));
+            }
             temp.setName(dragon.getName());
             temp.setCoordinates(dragon.getCoordinates());
             temp.setCreationDate(dragon.getCreationDate());
@@ -41,7 +53,7 @@ public class CollectionManager {
     public PriorityQueue<Dragon> getCollection(){
         return collection;
     }
-    public void removeById(Long id){
+    public void removeById(Long id,boolean undo){
         Iterator<Dragon> iter = collection.iterator();
         Dragon temp = null;
         while(iter.hasNext()) {
@@ -51,17 +63,28 @@ public class CollectionManager {
             }
         }
         if(temp!=null){
+            if(!undo) {
+                ((UndoCommand) ExecutionManager.commandManager.getUndoCommand()).addChange(new CollectionChangeRecord(REMOVE, temp));
+            }
             collection.remove(temp);
         }
     }
     public void clear(){
+        Iterator<Dragon> iter = collection.iterator();
+        Dragon temp = null;
+        while(iter.hasNext()) {
+            temp = iter.next();
+            ((UndoCommand) ExecutionManager.commandManager.getUndoCommand()).addChange(new CollectionChangeRecord(CLEAR,temp));
+        }
         collection.clear();
     }
     public Dragon head(){
         return collection.peek();
     }
     public Dragon removeHead(){
-        return collection.poll();
+        Dragon temp =collection.poll();
+        ((UndoCommand) ExecutionManager.commandManager.getUndoCommand()).addChange(new CollectionChangeRecord(REMOVE,temp));
+        return temp;
     }
     public void addIfMax(Dragon dragon){
         Iterator<Dragon> iter = collection.iterator();
@@ -75,7 +98,8 @@ public class CollectionManager {
             }
         }
         if(flag){
-            add(dragon);
+            ((UndoCommand) ExecutionManager.commandManager.getUndoCommand()).addChange(new CollectionChangeRecord(ADD,dragon));
+            add(dragon, false);
         }
     }
     public ArrayList<Dragon> filterByColor(Color color){

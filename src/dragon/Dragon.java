@@ -46,7 +46,7 @@ public class Dragon implements Comparable<Dragon> {
 
     public Dragon(Long id, String name, Coordinates coordinates, java.util.Date creationDate, Long age, boolean speaking, Color color, DragonType type, DragonHead head) {
         setId(id);
-        if(!isIdExist(id)){
+        if (!isIdExist(id)) {
             existId.add(id);
         }
         setName(name);
@@ -142,7 +142,7 @@ public class Dragon implements Comparable<Dragon> {
         return "Dragon{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
-                ", coordinates=" + coordinates.getX()+" "+coordinates.getY() +
+                ", coordinates=" + coordinates.getX() + " " + coordinates.getY() +
                 ", creationDate=" + DateFormat.getDateInstance().format(creationDate) +
                 ", age=" + age +
                 ", speaking=" + speaking +
@@ -150,5 +150,32 @@ public class Dragon implements Comparable<Dragon> {
                 ", type=" + type +
                 ", head=" + head +
                 "}";
+    }
+
+
+    public Dragon clone() {
+        if(head!=null){
+        return new Dragon(getId(),
+                getName(),
+                new Coordinates(getCoordinates().getX(), getCoordinates().getY()),
+                (Date) getCreationDate().clone(),
+                getAge(),
+                isSpeaking(),
+                getColor(),
+                getType(),
+                new DragonHead(getHead().getToothCount())
+                );}
+        else{
+            return new Dragon(getId(),
+                    getName(),
+                    new Coordinates(getCoordinates().getX(), getCoordinates().getY()),
+                    (Date) getCreationDate().clone(),
+                    getAge(),
+                    isSpeaking(),
+                    getColor(),
+                    getType(),
+                    null
+            );
+        }
     }
 }

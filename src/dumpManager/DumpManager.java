@@ -79,7 +79,7 @@ public class DumpManager {
                         type,
                         head
                 );
-                ExecutionManager.collectionManager.add(tempDragon);
+                ExecutionManager.collectionManager.add(tempDragon,true);
             }
 
         } catch (FileNotFoundException e) {

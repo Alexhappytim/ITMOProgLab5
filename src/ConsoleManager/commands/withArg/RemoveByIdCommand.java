@@ -10,7 +10,7 @@ public class RemoveByIdCommand implements CommandWithArgument {
     public void execute(String arg) {
         try{
             Long id = Long.parseLong(arg);
-            ExecutionManager.collectionManager.removeById(id);
+            ExecutionManager.collectionManager.removeById(id,false);
         }catch (Exception e){ExecutionManager.consoleManager.println("Неправильный аргумент");}
 
     }
