@@ -34,7 +34,7 @@ public class RequestsManager {
     }
     public Response receiveRespond(){
         try{
-        ByteBuffer responseBuffer = ByteBuffer.allocate(1024);
+        ByteBuffer responseBuffer = ByteBuffer.allocate(8192);
         SocketAddress adress = null;
         Client.consoleManager.print("Ожидаю ответа.");
         int i =0;
@@ -54,6 +54,7 @@ public class RequestsManager {
 
         return response;}
         catch (EOFException eofException){
+
             return new Response("Ответ не получен");
         }
         catch (Exception e){

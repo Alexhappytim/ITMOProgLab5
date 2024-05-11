@@ -13,7 +13,7 @@ public class UpdateCommand implements CommandWithArgument {
     public void execute(String arg) {
         try{
             Long a = Long.parseLong(arg);
-            Client.requestsManager.sendRequest(new Request("info",Client.consoleManager.inputNewElement()));
+            Client.requestsManager.sendRequest(new Request("update "+arg,Client.consoleManager.inputNewElement()));
             Client.consoleManager.println(Client.requestsManager.receiveRespond().getResponse());
         }catch(Exception e){
             Client.consoleManager.println("Неправильный id");
@@ -25,7 +25,7 @@ public class UpdateCommand implements CommandWithArgument {
     public void executeFromScript(String arg, Scanner scanner) {
         try{
             Long a = Long.parseLong(arg);
-            Client.requestsManager.sendRequest(new Request("info",Client.clientCommandManager.inputNewElementFromFile(scanner)));
+            Client.requestsManager.sendRequest(new Request("update "+arg,Client.clientCommandManager.inputNewElementFromFile(scanner)));
             Client.consoleManager.println(Client.requestsManager.receiveRespond().getResponse());
         }catch(Exception e){
             Client.consoleManager.println("Неправильный id");

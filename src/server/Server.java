@@ -24,6 +24,7 @@ public class Server {
            connectionManager = new ConnectionManager(1234);
         }catch (Exception e){
             printError("не коннектится");
+            return;
         }
         while(isRunning){
             Request request = connectionManager.receiveReq();
@@ -34,7 +35,7 @@ public class Server {
         System.out.println("\u001B[31m" +"<Server>:Error - "+error+"\u001B[31m");
     }
     public static void printInfo(String info){
-        System.out.println("\u001B[32m" +"<Server>:Error - "+info+"\u001B[32m");
+        System.out.println("\u001B[32m" +"<Server>:Info - "+info+"\u001B[32m");
     }
 
 }
