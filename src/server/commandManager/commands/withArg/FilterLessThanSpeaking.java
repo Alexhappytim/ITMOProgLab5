@@ -50,7 +50,12 @@ public class FilterLessThanSpeaking implements CommandWithArgument {
             collection.add(temp);
         }
         output += String.valueOf("-").repeat(Arrays.stream(stringSizes).sum() + 21) + "\n";
-
+        collection.sort(new Comparator<Dragon>() {
+            @Override
+            public int compare(Dragon o1, Dragon o2) {
+                return o1.getName().compareTo(o2.getName());
+            }
+        });
         for (Dragon dragon : collection) {
             String temp1 = dragon.getType() == null ? "null" : dragon.getType().name();
             String temp2 = dragon.getHead() == null ? "null" : String.valueOf(dragon.getHead().getToothCount());

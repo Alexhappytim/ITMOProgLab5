@@ -38,10 +38,12 @@ public class RequestsManager {
         SocketAddress adress = null;
         Client.consoleManager.print("Ожидаю ответа.");
         int i =0;
-        while (adress == null && i<10){
+        while (adress == null && i<100){
             adress = channel.receive(responseBuffer);
+            if(i%10==0){
             Client.consoleManager.print(".");
-            sleep(500);
+            }
+            sleep(50);
             i++;
         }
         Client.consoleManager.println("");

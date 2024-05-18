@@ -6,6 +6,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.PriorityQueue;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class CollectionManager {
     private PriorityQueue<Dragon> collection;
@@ -81,40 +83,25 @@ public class CollectionManager {
         return flag;
     }
     public ArrayList<Dragon> filterByColor(Color color){
-        Iterator<Dragon> iter = collection.iterator();
-        Dragon temp = null;
-        ArrayList<Dragon> viv = new ArrayList<>();
-        while(iter.hasNext()) {
-            temp = iter.next();
-            if (temp.getColor().equals(color)) {
-                viv.add(temp);
-            }
-        }
+//        Iterator<Dragon> iter = collection.iterator();
+//        Dragon temp = null;
+        ArrayList<Dragon> viv = (ArrayList<Dragon>) collection.stream().filter(n -> n.getColor().equals(color)).collect(Collectors.toList());
+//        while(iter.hasNext()) {
+//            temp = iter.next();
+//            if (temp.getColor().equals(color)) {
+//                viv.add(temp);
+//            }
+//        }
         return viv;
     }
     public ArrayList<Dragon> filterContainsName(String name){
-        Iterator<Dragon> iter = collection.iterator();
-        Dragon temp = null;
-        ArrayList<Dragon> viv = new ArrayList<>();
-        while(iter.hasNext()) {
-            temp = iter.next();
-            if (temp.getName().contains(name)) {
-                viv.add(temp);
-            }
-        }
+        ArrayList<Dragon> viv = (ArrayList<Dragon>) collection.stream().filter(n -> n.getName().equals(name)).collect(Collectors.toList());
+
         return viv;
     }
     public ArrayList<Dragon> filterLessThanSpeaking(boolean speaking){
-        Iterator<Dragon> iter = collection.iterator();
-        Dragon temp = null;
-        ArrayList<Dragon> viv = new ArrayList<>();
-        while(iter.hasNext()) {
-            temp = iter.next();
-            if(speaking && !temp.isSpeaking()){
-                viv.add(temp);
-            }
+        ArrayList<Dragon> viv = (ArrayList<Dragon>) collection.stream().filter(n -> n.isSpeaking() == speaking).collect(Collectors.toList());
 
-        }
         return viv;
     }
     public String info(){

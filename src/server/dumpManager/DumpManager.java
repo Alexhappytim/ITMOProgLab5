@@ -95,19 +95,25 @@ public class DumpManager {
         Dragon temp = null;
         while (iter.hasNext()) {
             temp = iter.next();
-            fileWriter.write(temp.getId() + ";\""
+            String s = "";
+            s+=temp.getId() + ";\""
                     + temp.getName() + "\";"
                     + temp.getCoordinates().getX() + ";"
                     + temp.getCoordinates().getY() + ";\""
                     + temp.getCreationDate() + "\";"
                     + temp.getAge() + ";"
                     + temp.isSpeaking() + ";\""
-                    + temp.getColor().name() + "\";\""
-                    + temp.getType().name() + "\";"
-                    + temp.getHead().getToothCount() + "\n");
+                    + temp.getColor().name() + "\";\"";
+            if(temp.getType() != null){
+                    s+= temp.getType().name();}
+            s += "\";";
+            if(temp.getHead()!=null){
+                    s+= temp.getHead().getToothCount();}
+            s += "\n";
+            fileWriter.write(s);
         }
         fileWriter.close();
-
+        Server.logger.info("Успешно записано в файл");
     }
 
 }

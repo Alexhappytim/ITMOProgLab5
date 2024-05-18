@@ -9,6 +9,7 @@ public class ExitCommand implements Command {
 
     @Override
     public String execute(Dragon dragon) {
+        Server.isRunning=false;
         return "Иш че удумали!";
     }
 }

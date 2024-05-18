@@ -41,7 +41,11 @@ public class CommandManager {
         }
         return "";
     }
-
+    public void runCommandLocal(String string){
+        if(string.equals("exit") || string.equals("save")){
+            commandHashMap.get(string).execute(null);
+        }
+    }
 
 
 

@@ -21,7 +21,7 @@ public class ClientCommandManager {
         commandHashMap.put("show",new ShowCommand());
         commandHashMap.put("clear",new ClearCommand());
 
-        commandHashMap.put("exit", new ExitCommand());
+         commandHashMap.put("exit", new ExitCommand());
         commandHashMap.put("head",new HeadCommand());
         commandHashMap.put("remove_head",new RemoveHeadCommand());
 

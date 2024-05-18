@@ -21,18 +21,21 @@ public class ConnectionManager {
         socket= new DatagramSocket(port);
         buffer = new byte[1024];
         packet = new DatagramPacket(buffer, buffer.length);
+        socket.setSoTimeout(10);
     }
 
     public Request receiveReq(){
         try {
                 socket.receive(packet);
+
                 ByteArrayInputStream bis = new ByteArrayInputStream(packet.getData());
                 ObjectInputStream ois = new ObjectInputStream(bis);
                 Request request = (Request) ois.readObject();
-            Server.printInfo("Получил реквест "+request);
+                Server.logger.info("Получил реквест "+request.getCommand()+" "+request.getArg());
                 return request;
-        } catch (Exception e) {
-            e.printStackTrace();
+        }catch (java.net.SocketTimeoutException s){}
+        catch (Exception e) {
+            Server.logger.severe("Ошибка при получении реквеста\n"+e.getStackTrace());
         }
         return null;
     }
@@ -44,7 +47,7 @@ public class ConnectionManager {
         byte[] response = bos.toByteArray();
         DatagramPacket responsePacket = new DatagramPacket(response, response.length, packet.getAddress(), packet.getPort());
         socket.send(responsePacket);
-            Server.printInfo("Отправил респонс "+resp);
+            Server.logger.info("Отправил респонс "+resp.getResponse());
         } catch (Exception e) {
             e.printStackTrace();
         }
