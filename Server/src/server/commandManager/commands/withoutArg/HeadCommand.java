@@ -8,7 +8,10 @@ import java.util.Scanner;
 public class HeadCommand implements Command {
     @Override
     public String execute(Dragon dragon) {
-
-        return Server.collectionManager.head().toString();
+        Dragon temp = Server.collectionManager.head();
+        if(temp != null){
+        return temp.toString();
+        }
+        else return "Коллекция пуста";
     }
 }

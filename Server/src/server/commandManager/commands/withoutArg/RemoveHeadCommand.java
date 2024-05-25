@@ -9,6 +9,10 @@ public class RemoveHeadCommand implements Command {
 
     @Override
     public String execute(Dragon dragon) {
-        return Server.collectionManager.removeHead().toString();
+        Dragon temp = Server.collectionManager.removeHead();
+        if(temp != null){
+            return temp.toString();
+        }
+        else return "Коллекция пуста";
     }
 }
