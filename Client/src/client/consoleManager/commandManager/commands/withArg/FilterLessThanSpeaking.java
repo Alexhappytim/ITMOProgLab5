@@ -12,6 +12,8 @@ public class FilterLessThanSpeaking implements CommandWithArgument {
         if(arg.equals("true") || arg.equals("false")){
             Client.requestsManager.sendRequest(new Request("filter_less_than_speaking "+arg,null));
             Client.consoleManager.println(Client.requestsManager.receiveRespond().getResponse());
+        }else{
+            Client.consoleManager.println("Введите true или false");
         }
     }
     @Override

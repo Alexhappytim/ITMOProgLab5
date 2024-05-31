@@ -11,10 +11,13 @@ public class RemoveByIdCommand implements CommandWithArgument {
     public String execute(String arg, Dragon dragon) {
         try{
             Long id = Long.parseLong(arg);
-            Server.collectionManager.removeById(id);
+            if(Server.collectionManager.removeById(id)){
+                return "Элемент удален";
+            }
         }catch (Exception e){
 
         }
-        return "Элемент удален";
+        return "Элемент не найден";
+
     }
 }

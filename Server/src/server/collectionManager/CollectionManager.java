@@ -1,6 +1,7 @@
 package server.collectionManager;
 
 import common.dragon.*;
+import server.Server;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -44,18 +45,17 @@ public class CollectionManager {
     public PriorityQueue<Dragon> getCollection(){
         return collection;
     }
-    public void removeById(Long id){
+    public boolean removeById(Long id){
         Iterator<Dragon> iter = collection.iterator();
         Dragon temp = null;
         while(iter.hasNext()) {
             temp = iter.next();
             if (temp.getId().equals(id)) {
-                break;
+                collection.remove(temp);
+                return true;
             }
         }
-        if(temp!=null){
-            collection.remove(temp);
-        }
+        return false;
     }
     public void clear(){
         collection.clear();
@@ -95,8 +95,7 @@ public class CollectionManager {
         return viv;
     }
     public ArrayList<Dragon> filterContainsName(String name){
-        ArrayList<Dragon> viv = (ArrayList<Dragon>) collection.stream().filter(n -> n.getName().equals(name)).collect(Collectors.toList());
-
+        ArrayList<Dragon> viv = (ArrayList<Dragon>) collection.stream().filter(n -> n.getName().contains(name)).collect(Collectors.toList());
         return viv;
     }
     public ArrayList<Dragon> filterLessThanSpeaking(boolean speaking){

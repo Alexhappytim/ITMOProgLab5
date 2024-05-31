@@ -9,13 +9,11 @@ public class FilterLessThanSpeaking implements CommandWithArgument {
     @Override
     public String execute(String arg, Dragon dragon1) {
         Collection<Dragon> col = null;
-        switch(arg){
-            case "true"->{
-                col = Server.collectionManager.filterLessThanSpeaking(true);}
-            case "false"->{
-                col = Server.collectionManager.filterLessThanSpeaking(false);}
-            default -> {
-                return "";}
+        if (arg.equals("true")) {
+            col = Server.collectionManager.filterLessThanSpeaking(false);
+        } else {
+            return "---------------------\n" +
+                    "---------------------";
         }
 
 
