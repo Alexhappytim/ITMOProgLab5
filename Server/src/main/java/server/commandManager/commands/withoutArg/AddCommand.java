@@ -28,7 +28,7 @@ public class AddCommand implements Command {
                         dragon.getToothCount()+", "+
                         userId+")"
                         );
-
+        int t = userId+1-1;
         if(tmp>0){
         Server.collectionManager.add(new Dragon(Long.valueOf(Server.dbConnection.getCurrentId()), dragon.getName(),
                 dragon.getCoordinates(),
@@ -37,7 +37,7 @@ public class AddCommand implements Command {
                 dragon.getColor(),
                 dragon.getType(),
                 dragon.getHead(),
-                userId));
+                t));
 
         return "Элемент успешно добавлен";}
         return "Ошибка при добавлении в базу данных";

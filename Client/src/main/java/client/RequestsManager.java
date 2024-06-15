@@ -14,6 +14,7 @@ import static java.lang.Thread.sleep;
 public class RequestsManager {
     public DatagramChannel channel;
     InetSocketAddress serverAddress;
+    private String bufferCommand;
     public RequestsManager() throws IOException {
         channel= DatagramChannel.open();
         channel.configureBlocking(false);
@@ -22,6 +23,7 @@ public class RequestsManager {
 
 
     public boolean sendRequest(Request request){
+        bufferCommand = request.getCommand();
         if((Client.curLogin.isEmpty() || Client.curPassword.isEmpty()) && !request.getCommand().contains("register")){
             Client.consoleManager.println("Пользователь не авторизован");
             return false;
@@ -40,7 +42,7 @@ public class RequestsManager {
         return true;
     }
     public Response receiveRespond(){
-        if(!(Client.curLogin.isEmpty() || Client.curPassword.isEmpty())) {
+        if(!(Client.curLogin.isEmpty() || Client.curPassword.isEmpty()) || bufferCommand.contains("register")) {
             try {
                 ByteBuffer responseBuffer = ByteBuffer.allocate(8192);
                 SocketAddress adress = null;

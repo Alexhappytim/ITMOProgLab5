@@ -1,11 +1,10 @@
 package server;
 
 import common.dragon.*;
-import common.network.Request;
-import common.network.Response;
 import server.collectionManager.CollectionManager;
 import server.dumpManager.DumpManager;
 import server.commandManager.CommandManager;
+import server.multiThreading.MainCycle;
 import server.network.ConnectionManager;
 import server.network.database.DBConnection;
 
@@ -13,7 +12,8 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.Scanner;
+import java.util.concurrent.ForkJoinPool;
+import java.util.concurrent.locks.ReentrantLock;
 import java.util.logging.FileHandler;
 import java.util.logging.Logger;
 import java.util.logging.SimpleFormatter;
@@ -27,7 +27,10 @@ public class Server {
     public static ConnectionManager connectionManager;
     public static DBConnection dbConnection;
     public static Logger logger = Logger.getLogger(ServerMain.class.getName());
+    public static ReentrantLock lockConnection= new ReentrantLock();
+    public static ReentrantLock lockCommands = new ReentrantLock();
 
+    public static ReentrantLock lockSending = new ReentrantLock();
 
     public static void start(String fileAdress) {
         try {
@@ -83,30 +86,10 @@ public class Server {
         }
 
         logger.info("Сервер инициализирован");
-        Scanner in = new Scanner(System.in);
-        while (isRunning) {
-            Request request = connectionManager.receiveReq();
-            if (request != null) {
-                if (dbConnection.checkUser(request.getLogin(), request.getPassword()) || request.getCommand().startsWith("register")) {
-                    if (request.getArg() != null) {
-                        request.getArg().setAuthorId(dbConnection.getUserId(request.getLogin()));
+        MainCycle mainCycle = new MainCycle(0);
+        ForkJoinPool forkJoinPool = new ForkJoinPool();
+        forkJoinPool.invoke(mainCycle);
 
-                    }
-                    Response resp = new Response(commandManager.runCommand(request.getCommand(), request.getArg(), dbConnection.getUserId(request.getLogin())));
-                    connectionManager.sendResp(resp);
-                } else {
-                    Response resp = new Response("Неправильный логин/пароль");
-                    connectionManager.sendResp(resp);
-                }
-            }
-            try {
-                if (System.in.available() != 0) {
-                    commandManager.runCommandLocal(in.nextLine());
-                }
-            } catch (Exception e) {
-                throw new RuntimeException(e);
-            }
-        }
         logger.info("Сервер закончил работу штатно");
     }
 

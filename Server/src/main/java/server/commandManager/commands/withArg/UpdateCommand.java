@@ -14,7 +14,7 @@ public class UpdateCommand implements CommandWithArgument {
             Long a = Long.parseLong(arg);
             String tempType;
             if(dragon.getType() == null){
-                tempType = "null, ";
+                tempType = "NULL, ";
             }else{
                 tempType = "'"+dragon.getType()+"', ";
             }
@@ -23,10 +23,10 @@ public class UpdateCommand implements CommandWithArgument {
                     "x="+dragon.getCoordinates().getX()+", "+
                     "y="+dragon.getCoordinates().getY()+", "+
                     "age="+dragon.getAge()+", "+
-                    "creation_date=GETDATE(), "+
+                    "creation_date=NOW(), "+
                     "speaking="+dragon.isSpeaking()+", "+
                     "color='"+dragon.getColor()+"', "+
-                    tempType+
+                    "type="+tempType+
                     "tooth_count="+dragon.getToothCount()+" where id="+a+"and author_id="+userId);
 
             Iterator<Dragon> iter = Server.collectionManager.getCollection().iterator();
@@ -40,7 +40,9 @@ public class UpdateCommand implements CommandWithArgument {
             }
             return "У вас нет элемента с таким id";
         }catch(Exception e){
+            e.printStackTrace();
             return "";
         }
+
     }
 }

@@ -39,7 +39,7 @@ public class Dragon implements Comparable<Dragon>, Serializable {
     private Color color; //Поле не может быть null
     private DragonType type; //Поле может быть null
     private DragonHead head;
-    private Integer authorId;
+    private int authorId;
 
     public Dragon(String name, Coordinates coordinates, Long age, boolean speaking, Color color, DragonType type, DragonHead head, Integer authorId) {
         this(newId(), name, coordinates, new Date(), age, speaking, color, type, head,authorId);

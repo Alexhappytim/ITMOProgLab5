@@ -19,7 +19,7 @@ public class ConnectionManager {
     DatagramPacket packet;
     public ConnectionManager(int port) throws SocketException {
         socket= new DatagramSocket(port);
-        buffer = new byte[1024];
+        buffer = new byte[8192];
         packet = new DatagramPacket(buffer, buffer.length);
         socket.setSoTimeout(10);
     }

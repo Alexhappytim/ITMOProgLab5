@@ -26,6 +26,7 @@ public class DBConnection {
             statement = connection.createStatement();
             return statement.executeQuery(str);
         } catch (SQLException e) {
+            Server.printError("Потеряна связь с базой данных");
             return null;
         }
 
@@ -36,7 +37,8 @@ public class DBConnection {
             Statement statement = connection.createStatement();
             return statement.executeUpdate(str);
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            Server.printError("Потеряна связь с базой данных");
+            return -1;
         }
     }
     public Boolean checkUser(String login,String password){
@@ -44,7 +46,8 @@ public class DBConnection {
         try {
             return res.next();
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            Server.printError("Потеряна связь с базой данных");
+            return false;
         }
     }
     public Integer getUserId(String login){
@@ -56,7 +59,8 @@ public class DBConnection {
                 return -1;
             }
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            Server.printError("Потеряна связь с базой данных");
+            return -1;
         }
     }
 
@@ -66,7 +70,8 @@ public class DBConnection {
             res.next();
             return res.getInt(1);
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            Server.printError("Потеряна связь с базой данных");
+            return -1;
         }
     }
 }

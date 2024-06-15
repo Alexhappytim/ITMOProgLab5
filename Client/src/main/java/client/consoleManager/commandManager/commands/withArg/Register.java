@@ -23,6 +23,7 @@ public class Register implements CommandWithArgument{
                 hexString.append(hex);
             }
             Client.requestsManager.sendRequest(new Request("register "+arg.split(" ")[0]+" "+hexString.toString(),null));
+
             Client.consoleManager.println(Client.requestsManager.receiveRespond().getResponse());
         } catch (NoSuchAlgorithmException e) {
             Client.consoleManager.println("Ошибка хэширования");

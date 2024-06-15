@@ -55,7 +55,7 @@ public class ShowCommand implements Command {
                     dragon.getColor().name() + " ".repeat(stringSizes[7] - dragon.getColor().name().length()) + " |" +
                     temp1 + " ".repeat(stringSizes[8] - temp1.length()) + " |" +
                     temp2 + " ".repeat(stringSizes[9] - temp2.length()) + " |" +
-                    temp.getAuthorId() + " ".repeat(stringSizes[10] - temp.getAuthorId().toString().length()) + " |" +"\n";
+                    dragon.getAuthorId() + " ".repeat(stringSizes[10] - dragon.getAuthorId().toString().length()) + " |" +"\n";
         }
         output += "-".repeat(Arrays.stream(stringSizes).sum() + 23) + "\n";
         return output;
