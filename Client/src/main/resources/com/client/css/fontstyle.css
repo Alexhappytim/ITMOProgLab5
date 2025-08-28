@@ -1,0 +1,17 @@
+@font-face {
+    font-family: 'Cyrillic Pixel-7';
+    src: url('../cyrillicPixel.ttf');
+}
+
+.label {
+    -fx-font-family: 'Cyrillic Pixel-7';
+    -fx-text-align: center;
+}
+
+
+.passwordField {
+    -fx-font-family: 'Cyrillic Pixel-7';
+}
+.textField {
+    -fx-font-family: 'Cyrillic Pixel-7';
+}

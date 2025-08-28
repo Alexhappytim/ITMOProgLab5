@@ -1,0 +1,20 @@
+@font-face {
+    font-family: 'Cyrillic Pixel-7';
+    src: url('../cyrillicPixel.ttf');
+}
+
+.button, .menu_button {
+-fx-font-family: 'Cyrillic Pixel-7';
+    -fx-background-image: url('button.png');
+-fx-background-size: 100% 100%;
+    -fx-background-repeat: no-repeat;
+    -fx-background-color: transparent;
+        -fx-focus-color: transparent; /* Убирает обводку при фокусе */
+        -fx-faint-focus-color: transparent;
+}
+
+.button:pressed {
+    -fx-translate-y: 3px;
+
+}
+

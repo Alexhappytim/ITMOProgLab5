@@ -1,0 +1,14 @@
+@font-face {
+    font-family: 'Cyrillic Pixel-7';
+    src: url('../cyrillicPixel.ttf');
+}
+.table-view {
+    -fx-background-color: transparent;
+    -fx-font-family: 'Cyrillic Pixel-7';
+}
+.table-view .column-header-background{
+    -fx-background-color: #B28A4C;
+}
+.table-view .column-header {
+    -fx-background-color: transparent;
+}
